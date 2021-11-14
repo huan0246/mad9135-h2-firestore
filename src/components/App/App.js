@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar'
 import Home from '../Home/Home'
 import AddFavorite from '../AddFavorite/AddFavorite'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs, addDoc} from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, setDoc} from 'firebase/firestore';
 import { Switch, Route } from "react-router-dom";
 
 
@@ -30,6 +30,8 @@ function App() {
   const mealsdb = collection(db, 'meals');
   const drinksdb = collection(db, "drinks");
   const snacksdb = collection(db, "snacks");
+
+
 
   function getMealsFromDb() {
     getDocs(mealsdb)
@@ -78,20 +80,25 @@ function App() {
 
   function addNewItem(category, newItemName) {
     if (category === 'meals'){
-      addDoc(mealsdb, {
-        name: newItemName
-      })
-      .then(() => {
+      let timestamp = Date.now().toString()
+      setDoc(doc(db, "meals", timestamp), {
+        id: timestamp,
+        name: newItemName,
+      }).then(() => {
         getMealsFromDb();
-      })
+      });
     } else if (category === 'drinks'){
-      addDoc(drinksdb, {
+      let timestamp = Date.now().toString();
+      setDoc(doc(db, "drinks", timestamp), {
+        id: timestamp,
         name: newItemName,
       }).then(() => {
         getDrinksFromDb();
       });
     } else if (category === 'snacks'){
-      addDoc(snacksdb, {
+      let timestamp = Date.now().toString();
+      setDoc(doc(db, "snacks", timestamp), {
+        id: timestamp,
         name: newItemName,
       }).then(() => {
         getSnacksFromDb();
@@ -99,6 +106,18 @@ function App() {
     }
     //console.log(category, newItemName);
   }
+
+  function deleteItem(category, id){
+    deleteDoc(doc(db, category, id))
+    .then(() => {
+      console.log('deleted')
+      getMealsFromDb();
+      getDrinksFromDb();
+      getSnacksFromDb();
+    })
+    //console.log(id, category)
+  }
+
 
   useEffect(() => {
     getMealsFromDb();
@@ -115,12 +134,15 @@ function App() {
       <main>
         <Switch>
           <Route path="/addfavorite">
-            <AddFavorite
-              addNewItem={addNewItem}
-            />
+            <AddFavorite addNewItem={addNewItem} />
           </Route>
           <Route path="/">
-            <Home drinks={drinks} meals={meals} snacks={snacks} />
+            <Home
+              drinks={drinks}
+              meals={meals}
+              snacks={snacks}
+              deleteItem={deleteItem}
+            />
           </Route>
         </Switch>
       </main>

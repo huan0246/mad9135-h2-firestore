@@ -1,7 +1,7 @@
 import React from 'react'
 import "./home.css";
 
-export default function Home({ meals, drinks, snacks }) {
+export default function Home({ meals, drinks, snacks, deleteItem }) {
   return (
     <div className="homePage">
       <ul>
@@ -14,7 +14,7 @@ export default function Home({ meals, drinks, snacks }) {
                   <div>{meal.name}</div>
                   <div>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={() => deleteItem("meals", meal.id)}>Delete</button>
                   </div>
                 </li>
               ))}
@@ -29,7 +29,7 @@ export default function Home({ meals, drinks, snacks }) {
                   <div>{drink.name}</div>
                   <div>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={() => deleteItem("drinks", drink.id)}>Delete</button>
                   </div>
                 </li>
               ))}
@@ -44,7 +44,7 @@ export default function Home({ meals, drinks, snacks }) {
                   <div>{snack.name}</div>
                   <div>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={() => deleteItem("snacks", snack.id)}>Delete</button>
                   </div>
                 </li>
               ))}

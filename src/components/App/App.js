@@ -4,7 +4,16 @@ import Navbar from '../Navbar/Navbar'
 import Home from '../Home/Home'
 import AddFavorite from '../AddFavorite/AddFavorite'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, setDoc} from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { Switch, Route } from "react-router-dom";
 
 
@@ -118,6 +127,15 @@ function App() {
     //console.log(id, category)
   }
 
+  function updateItem(category, id, name) {
+    if (category === 'meals'){
+      updateDoc(doc(db, "meals", id), {name}).then(() => {
+        console.log("updated")
+        getMealsFromDb();
+      })
+    }
+  }
+
 
   useEffect(() => {
     getMealsFromDb();
@@ -142,6 +160,7 @@ function App() {
               meals={meals}
               snacks={snacks}
               deleteItem={deleteItem}
+              updateItem={updateItem}
             />
           </Route>
         </Switch>

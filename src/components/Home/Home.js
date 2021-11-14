@@ -76,36 +76,104 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
               ))}
           </ul>
         </li>
+
         <li>
           <h3>Drinks</h3>
           <ul>
             {drinks !== null &&
               drinks.map((drink) => (
                 <li key={drink.id}>
-                  <div>{drink.name}</div>
-                  <div>
-                    <button>Edit</button>
-                    <button onClick={() => deleteItem("drinks", drink.id)}>
-                      Delete
-                    </button>
-                  </div>
+                  {selectId !== drink.id && (
+                    <>
+                      <div>{drink.name}</div>
+                      <div>
+                        <button
+                          onClick={() =>
+                            changeSelectIdAndName(drink.id, drink.name)
+                          }
+                        >
+                          Edit
+                        </button>
+                        <button onClick={() => deleteItem("drinks", drink.id)}>
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {selectId === drink.id && (
+                    <form action="">
+                      <div>
+                        <input
+                          type="text"
+                          id="inputName"
+                          required
+                          defaultValue={updatedName}
+                          onChange={updatedInput}
+                        />
+                      </div>
+                      <div>
+                        <button onClick={cancelEdit}>Cancel</button>
+                        <button
+                          onClick={() =>
+                            saveEditName("drinks", drink.id, updatedName)
+                          }
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </li>
               ))}
           </ul>
         </li>
+
         <li>
           <h3>Snacks</h3>
           <ul>
             {snacks !== null &&
               snacks.map((snack) => (
                 <li key={snack.id}>
-                  <div>{snack.name}</div>
-                  <div>
-                    <button>Edit</button>
-                    <button onClick={() => deleteItem("snacks", snack.id)}>
-                      Delete
-                    </button>
-                  </div>
+                  {selectId !== snack.id && (
+                    <>
+                      <div>{snack.name}</div>
+                      <div>
+                        <button
+                          onClick={() =>
+                            changeSelectIdAndName(snack.id, snack.name)
+                          }
+                        >
+                          Edit
+                        </button>
+                        <button onClick={() => deleteItem("snacks", snack.id)}>
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {selectId === snack.id && (
+                    <form action="">
+                      <div>
+                        <input
+                          type="text"
+                          id="inputName"
+                          required
+                          defaultValue={updatedName}
+                          onChange={updatedInput}
+                        />
+                      </div>
+                      <div>
+                        <button onClick={cancelEdit}>Cancel</button>
+                        <button
+                          onClick={() =>
+                            saveEditName("snacks", snack.id, updatedName)
+                          }
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </li>
               ))}
           </ul>

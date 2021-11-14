@@ -93,25 +93,31 @@ function App() {
       setDoc(doc(db, "meals", timestamp), {
         id: timestamp,
         name: newItemName,
-      }).then(() => {
-        getMealsFromDb();
-      });
+      })
+        .then(() => {
+          getMealsFromDb();
+        })
+        .catch((err) => console.log(err.message));
     } else if (category === 'drinks'){
       let timestamp = Date.now().toString();
       setDoc(doc(db, "drinks", timestamp), {
         id: timestamp,
         name: newItemName,
-      }).then(() => {
-        getDrinksFromDb();
-      });
+      })
+        .then(() => {
+          getDrinksFromDb();
+        })
+        .catch((err) => console.log(err.message));
     } else if (category === 'snacks'){
       let timestamp = Date.now().toString();
       setDoc(doc(db, "snacks", timestamp), {
         id: timestamp,
         name: newItemName,
-      }).then(() => {
-        getSnacksFromDb();
-      });
+      })
+        .then(() => {
+          getSnacksFromDb();
+        })
+        .catch((err) => console.log(err.message));
     }
     //console.log(category, newItemName);
   }
@@ -124,25 +130,38 @@ function App() {
       getDrinksFromDb();
       getSnacksFromDb();
     })
+    .catch((err) => {
+      console.log(err.message)
+    });
     //console.log(id, category)
   }
 
   function updateItem(category, id, name) {
     if (category === 'meals'){
       updateDoc(doc(db, "meals", id), {name}).then(() => {
-        console.log("updated")
         getMealsFromDb();
       })
+      .catch((err) => console.log(err.message));
+    } else if (category === 'drinks'){
+      updateDoc(doc(db, "drinks", id), { name })
+        .then(() => {
+          getDrinksFromDb();
+        })
+        .catch((err) => console.log(err.message));
+    } else if (category === 'snacks'){
+      updateDoc(doc(db, "snacks", id), { name })
+        .then(() => {
+          getSnacksFromDb();
+        })
+        .catch((err) => console.log(err.message));
     }
   }
-
 
   useEffect(() => {
     getMealsFromDb();
     getDrinksFromDb();
     getSnacksFromDb();
   }, []);
-
 
   return (
     <div className="App">

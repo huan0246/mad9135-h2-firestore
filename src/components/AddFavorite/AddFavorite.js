@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import "./addFavorite.css";
+import { useHistory } from "react-router";
 
 export default function AddFavorite({ addNewItem }) {
   const [category, setCategory] = useState("meals");
   const [newItemName, setNewItemName] = useState(null);
+  const history = useHistory()
 
   function submitForm(e) {
     e.preventDefault();
     if (newItemName !== null) {
       addNewItem(category, newItemName);
       //console.log(category, newItemName)
+      history.push('/')
     } else {
       console.log('xxx')
     }
@@ -44,16 +47,6 @@ export default function AddFavorite({ addNewItem }) {
           <div className="inputPair">
             <input
               type="radio"
-              id="addSnack"
-              name="addFavorite"
-              value="snacks"
-              onChange={changeCategory}
-            />
-            <label htmlFor="addSnack">Snack</label>
-          </div>
-          <div className="inputPair">
-            <input
-              type="radio"
               id="addDrink"
               name="addFavorite"
               value="drinks"
@@ -61,6 +54,17 @@ export default function AddFavorite({ addNewItem }) {
             />
               <label htmlFor="addDrink">Drink</label>
           </div>
+          <div className="inputPair">
+            <input
+              type="radio"
+              id="addSnack"
+              name="addFavorite"
+              value="snacks"
+              onChange={changeCategory}
+            />
+            <label htmlFor="addSnack">Snack</label>
+          </div>
+          
         </div>
         <div>
           <label htmlFor="inputName">Name</label>

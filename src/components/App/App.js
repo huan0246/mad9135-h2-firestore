@@ -26,7 +26,6 @@ function App() {
   const [meals, setMeals] = useState(null);
   const [drinks, setDrinks] = useState(null);
   const [snacks, setSnacks] = useState(null);
-  const [newItem, setNewItem] = useState(null);
 
   const mealsdb = collection(db, 'meals');
   const drinksdb = collection(db, "drinks");
@@ -40,7 +39,7 @@ function App() {
           mealsArr.push({ ...doc.data(), id: doc.id });
         });
         setMeals(mealsArr);
-        console.log(mealsArr);
+        //console.log(mealsArr);
       })
       .catch((err) => {
         console.log(err.message);
@@ -55,7 +54,7 @@ function App() {
           drinksArr.push({ ...doc.data(), id: doc.id });
         });
         setDrinks(drinksArr);
-        console.log(drinksArr);
+        //console.log(drinksArr);
       })
       .catch((err) => {
         console.log(err.message);
@@ -70,15 +69,35 @@ function App() {
           snacksArr.push({ ...doc.data(), id: doc.id });
         });
         setSnacks(snacksArr);
-        console.log(snacksArr);
+        //console.log(snacksArr);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }
 
-  function addNewItem(){
-    
+  function addNewItem(category, newItemName) {
+    if (category === 'meals'){
+      addDoc(mealsdb, {
+        name: newItemName
+      })
+      .then(() => {
+        getMealsFromDb();
+      })
+    } else if (category === 'drinks'){
+      addDoc(drinksdb, {
+        name: newItemName,
+      }).then(() => {
+        getDrinksFromDb();
+      });
+    } else if (category === 'snacks'){
+      addDoc(snacksdb, {
+        name: newItemName,
+      }).then(() => {
+        getSnacksFromDb();
+      });
+    }
+    //console.log(category, newItemName);
   }
 
   useEffect(() => {
@@ -97,8 +116,6 @@ function App() {
         <Switch>
           <Route path="/addfavorite">
             <AddFavorite
-              newItem={newItem}
-              setNewItem={setNewItem}
               addNewItem={addNewItem}
             />
           </Route>

@@ -2,27 +2,28 @@ import React, { useState } from 'react'
 import "./addFavorite.css";
 
 export default function AddFavorite({ addNewItem }) {
-
-  const [category, setCategory] = useState('meals');
+  const [category, setCategory] = useState("meals");
   const [newItemName, setNewItemName] = useState(null);
 
   function submitForm(e) {
     e.preventDefault();
-    addNewItem();
-    console.log("HGF");
-    console.log(category, newItemName)
+    if (newItemName !== null) {
+      addNewItem(category, newItemName);
+      //console.log(category, newItemName)
+    } else {
+      console.log('xxx')
+    }
   }
 
   function changeCategory(e) {
     //console.log(e.target.value);
-    setCategory(e.target.value)
+    setCategory(e.target.value);
   }
 
   function changeName(e) {
     //console.log(e.target.value);
     setNewItemName(e.target.value);
   }
-
 
   return (
     <div className="addFavorite">
@@ -63,7 +64,7 @@ export default function AddFavorite({ addNewItem }) {
         </div>
         <div>
           <label htmlFor="inputName">Name</label>
-          <input type="text" id="inputName" onChange={changeName}/>
+          <input type="text" id="inputName" onChange={changeName} required />
         </div>
         <div>
           <button onClick={submitForm}>Submit</button>

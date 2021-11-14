@@ -9,21 +9,45 @@ export default function Home({ meals, drinks, snacks }) {
           <h3>Meals</h3>
           <ul>
             {meals !== null &&
-              meals.map((meal) => <li key={meal.id}>{meal.name}</li>)}
+              meals.map((meal) => (
+                <li key={meal.id}>
+                  <div>{meal.name}</div>
+                  <div>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </div>
+                </li>
+              ))}
           </ul>
         </li>
         <li>
           <h3>Drinks</h3>
           <ul>
             {drinks !== null &&
-              drinks.map((drink) => <li key={drink.id}>{drink.name}</li>)}
+              drinks.map((drink) => (
+                <li key={drink.id}>
+                  <div>{drink.name}</div>
+                  <div>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </div>
+                </li>
+              ))}
           </ul>
         </li>
         <li>
           <h3>Snacks</h3>
           <ul>
             {snacks !== null &&
-              snacks.map((snack) => <li key={snack.id}>{snack.name}</li>)}
+              snacks.map((snack) => (
+                <li key={snack.id}>
+                  <div>{snack.name}</div>
+                  <div>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </div>
+                </li>
+              ))}
           </ul>
         </li>
       </ul>

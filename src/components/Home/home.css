@@ -1,0 +1,39 @@
+.homePage{
+  display: flex;
+  background-color: cornflowerblue;
+  min-height: 100vh;
+  padding: 4.5rem 0 0 0;
+}
+
+.categoryUl{
+  background-color: crimson;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.categoryLi{
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.itemUl{
+  margin: 0 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: darkseagreen;
+}
+
+.itemLi{
+  margin: 0.5rem 0;
+  background-color: darksalmon;
+}

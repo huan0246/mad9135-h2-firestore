@@ -1,18 +1,112 @@
 import './App.css';
+import React, { useEffect, useState } from "react";
+import Navbar from '../Navbar/Navbar'
+import Home from '../Home/Home'
+import AddFavorite from '../AddFavorite/AddFavorite'
+import { initializeApp } from 'firebase/app'
+import { getFirestore, collection, getDocs, addDoc} from 'firebase/firestore';
+import { Switch, Route } from "react-router-dom";
+
 
 function App() {
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBau2l_7JBEKCQhXqRJXel3K_m0Cyu_Qes",
+    authDomain: "h3-firestore.firebaseapp.com",
+    projectId: "h3-firestore",
+    storageBucket: "h3-firestore.appspot.com",
+    messagingSenderId: "840794726230",
+    appId: "1:840794726230:web:75af9fae2e3bbd300d80f7",
+  };
+
+  initializeApp(firebaseConfig)
+
+  const db = getFirestore()
+
+  const [meals, setMeals] = useState(null);
+  const [drinks, setDrinks] = useState(null);
+  const [snacks, setSnacks] = useState(null);
+  const [newItem, setNewItem] = useState(null);
+
+  const mealsdb = collection(db, 'meals');
+  const drinksdb = collection(db, "drinks");
+  const snacksdb = collection(db, "snacks");
+
+  function getMealsFromDb() {
+    getDocs(mealsdb)
+      .then((snapshot) => {
+        let mealsArr = [];
+        snapshot.docs.forEach((doc) => {
+          mealsArr.push({ ...doc.data(), id: doc.id });
+        });
+        setMeals(mealsArr);
+        console.log(mealsArr);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function getDrinksFromDb() {
+    getDocs(drinksdb)
+      .then((snapshot) => {
+        let drinksArr = [];
+        snapshot.docs.forEach((doc) => {
+          drinksArr.push({ ...doc.data(), id: doc.id });
+        });
+        setDrinks(drinksArr);
+        console.log(drinksArr);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function getSnacksFromDb() {
+    getDocs(snacksdb)
+      .then((snapshot) => {
+        let snacksArr = [];
+        snapshot.docs.forEach((doc) => {
+          snacksArr.push({ ...doc.data(), id: doc.id });
+        });
+        setSnacks(snacksArr);
+        console.log(snacksArr);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function addNewItem(){
+    
+  }
+
+  useEffect(() => {
+    getMealsFromDb();
+    getDrinksFromDb();
+    getSnacksFromDb();
+  }, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          sdcdscsdc
-        </a>
+      <header>
+        <Navbar />
       </header>
+      <main>
+        <Switch>
+          <Route path="/addfavorite">
+            <AddFavorite
+              newItem={newItem}
+              setNewItem={setNewItem}
+              addNewItem={addNewItem}
+            />
+          </Route>
+          <Route path="/">
+            <Home drinks={drinks} meals={meals} snacks={snacks} />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 }

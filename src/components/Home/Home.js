@@ -25,17 +25,17 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
 
   return (
     <div className="homePage">
-      <ul>
-        <li>
+      <ul className="categoryUl">
+        <li className="categoryLi">
           <h3>Meals</h3>
-          <ul>
+          <ul className="itemUl">
             {meals !== null &&
               meals.map((meal) => (
-                <li key={meal.id}>
+                <li key={meal.id} className="itemLi">
                   {selectId !== meal.id && (
-                    <>
+                    <div className="itemDiv">
                       <div>{meal.name}</div>
-                      <div>
+                      <div className="btnGroup">
                         <button
                           onClick={() =>
                             changeSelectIdAndName(meal.id, meal.name)
@@ -47,10 +47,10 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           Delete
                         </button>
                       </div>
-                    </>
+                    </div>
                   )}
                   {selectId === meal.id && (
-                    <form action="">
+                    <form action="" className="editForm">
                       <div>
                         <input
                           type="text"
@@ -60,7 +60,7 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           onChange={updatedInput}
                         />
                       </div>
-                      <div>
+                      <div className="editBtnGroup">
                         <button onClick={cancelEdit}>Cancel</button>
                         <button
                           onClick={() =>
@@ -77,16 +77,16 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
           </ul>
         </li>
 
-        <li>
+        <li className="categoryLi">
           <h3>Drinks</h3>
-          <ul>
+          <ul className="itemUl">
             {drinks !== null &&
               drinks.map((drink) => (
-                <li key={drink.id}>
+                <li key={drink.id} className="itemLi">
                   {selectId !== drink.id && (
-                    <>
+                    <div className="itemDiv">
                       <div>{drink.name}</div>
-                      <div>
+                      <div className="btnGroup">
                         <button
                           onClick={() =>
                             changeSelectIdAndName(drink.id, drink.name)
@@ -98,10 +98,10 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           Delete
                         </button>
                       </div>
-                    </>
+                    </div>
                   )}
                   {selectId === drink.id && (
-                    <form action="">
+                    <form action="" className="editForm">
                       <div>
                         <input
                           type="text"
@@ -111,7 +111,7 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           onChange={updatedInput}
                         />
                       </div>
-                      <div>
+                      <div className="editBtnGroup">
                         <button onClick={cancelEdit}>Cancel</button>
                         <button
                           onClick={() =>
@@ -128,16 +128,16 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
           </ul>
         </li>
 
-        <li>
+        <li className="categoryLi">
           <h3>Snacks</h3>
-          <ul>
+          <ul className="itemUl">
             {snacks !== null &&
               snacks.map((snack) => (
-                <li key={snack.id}>
+                <li key={snack.id} className="itemLi">
                   {selectId !== snack.id && (
-                    <>
+                    <div className="itemDiv">
                       <div>{snack.name}</div>
-                      <div>
+                      <div className="btnGroup">
                         <button
                           onClick={() =>
                             changeSelectIdAndName(snack.id, snack.name)
@@ -149,10 +149,10 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           Delete
                         </button>
                       </div>
-                    </>
+                    </div>
                   )}
                   {selectId === snack.id && (
-                    <form action="">
+                    <form action="" className="editForm">
                       <div>
                         <input
                           type="text"
@@ -162,7 +162,7 @@ export default function Home({ meals, drinks, snacks, deleteItem, updateItem }) 
                           onChange={updatedInput}
                         />
                       </div>
-                      <div>
+                      <div className="editBtnGroup">
                         <button onClick={cancelEdit}>Cancel</button>
                         <button
                           onClick={() =>

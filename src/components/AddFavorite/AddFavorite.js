@@ -31,7 +31,7 @@ export default function AddFavorite({ addNewItem }) {
   return (
     <div className="addFavorite">
       <form action="">
-        <div>
+        <div className="formContent">
           <p>Select a category:</p>
           <div className="inputPair">
             <input
@@ -64,14 +64,13 @@ export default function AddFavorite({ addNewItem }) {
             />
             <label htmlFor="addSnack">Snack</label>
           </div>
-          
         </div>
-        <div>
-          <label htmlFor="inputName">Name</label>
+        <div className="inputName">
+          <label htmlFor="inputName" className="nameLabel">Food Name: </label>
           <input type="text" id="inputName" onChange={changeName} required />
         </div>
         <div>
-          <button onClick={submitForm}>Submit</button>
+          <button onClick={submitForm} className="submitBtn">Submit</button>
         </div>
       </form>
     </div>

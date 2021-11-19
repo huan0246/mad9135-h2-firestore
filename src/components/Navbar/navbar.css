@@ -13,9 +13,9 @@
 }
 
 a{
-  margin: 0 1.5rem 0 0;
+  margin: .3rem 1.5rem .3rem 0;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: .8rem;
   font-weight: bold;
   background-color: #ecdfdd;
   padding: .3rem .6rem;
@@ -29,4 +29,18 @@ a.active{
 
 .logo{
   color: #ecdfdd;
+}
+
+.links{
+  display: flex;
+  flex-direction: column;
+}
+
+@media all and (min-width: 600px) {
+  .links {
+  flex-direction: row;
+  }
+  a{
+    font-size: 1.2rem;
+  }
 }

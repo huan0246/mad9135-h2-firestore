@@ -1,5 +1,47 @@
 .addFavorite{
-  background-color: darkgray;
+  background-color: #f5e3d0;
   min-height: 100vh;
   padding: 7rem 0 0 0;
+  font-size: 0.8rem;
+}
+
+.formContent{
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputPair{
+  display: flex;
+  justify-content: center;
+  margin: .6rem;
+}
+
+.inputName{
+  width: 80%;
+  max-width: 260px;
+  margin: .5rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.nameLabel{
+  margin: 0 0 1rem;
+}
+
+.submitBtn{
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 1rem 0 0;
+}
+
+@media all and (min-width: 600px) {
+  .submitBtn {
+    font-size: 1.2rem;
+  }
+  .addFavorite {
+    font-size: 1.2rem;
+  }
 }
